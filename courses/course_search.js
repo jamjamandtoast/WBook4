@@ -56,17 +56,46 @@ let courses = [
    getCourseStartDate(courses);
    console.log("course start Date:" + courseDateStart) */
 
-   function getCourseStartDate(courses, startDate) {
-    let dateStart = [];
+   function getCourseid(courses, CourseId) {
+    let namcourse = [];
     let numDate = courses.length;
     for(let i = 0; i < numDate; i++) {
-        if (courses[i].StartDate == startDate) {
-            dateStart.push(courses[i]);
+        if (courses[i].CourseId == CourseId) {
+            namcourse.push(courses[i]);
         }
     }
     
-    return dateStart;
+    return namcourse;
+    
 }
+
+let results = [];
+for (let i = 0; i < courses.length; i++) {
+    if ((courses[i].Fee) <= 50) {
+        results.push(courses[i]);
+    }
+  }
+   // function makes my string into one line + ", "
+   function getTitleList(courses){
+    let msg2 = "";
+    for (let i = 0 ; i < courses.length; i++){
+        msg2 += courses[i].Title + ", ";
+    }
+    return msg2.substring(0, msg2.length - 2)
+  }
+  let forClass = [];
+  for (let i = 0; i < courses.length; i++) {
+    if (courses[i].Location === "Classroom 1") {
+      forClass.push(courses[i]);
+    }
+  }
+  function getLocationforClassRoom(courses) {
+    let courseIDs = "";
+    for (let i = 0; i < courses.length; i++) {
+      courseIDs += courses[i].CourseId + ", ";
+    }
+    return courseIDs.substring(0, courseIDs.length - 2);
+  }
 
 function displayCourseDate(courses) {
     let courseDateStart = courses.length;
@@ -76,6 +105,11 @@ function displayCourseDate(courses) {
     }
 }
 
+let course = getCourseid(courses, "PROJ500");
+displayCourseDate(course);
 
-let startDateCourses = getCourseStartDate(courses, "11/22/22");
-displayCourseDate(startDateCourses);
+let msg = `The titles of the courses that cost $50 or less are: ${getTitleList(results)}.`;
+console.log(msg);
+
+let locaTion = `The classes that are held in classroom 1 are: ${getLocationforClassRoom(forClass)}`;
+console.log(locaTion);
